@@ -22,24 +22,17 @@ void mostraEquipasAtivas(void)
 	// posicionar no inicio do ficheiro
 	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
 
-	// inicio da listagem
-	printf("\n\n=== EQUIPAS ======\n");
-	printf("%s\t%s\n", "ID", "NOME");
-
 	// obter os dados dos ficheiros
 	while (fread(&equipa, sizeof(Equipa), 1, ficheiro) == 1) 
 	{
 		if (equipa.ativo != 0)
 		{
-			printf("%06d\t%-20s\n", equipa.id, equipa.nome);
+			printf("%02d\t%-20s\n", equipa.id, equipa.nome);
 		}
 	}
 
 	// fechar o ficheiro
 	fclose(ficheiro);
-
-	// fim da listagem
-	printf("=== fim ======\n");
 }
 
 

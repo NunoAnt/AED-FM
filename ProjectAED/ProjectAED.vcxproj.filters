@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Jogador">
       <UniqueIdentifier>{e9d18b07-79bf-4e33-861b-e3f89573536b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Treinador">
+      <UniqueIdentifier>{62292d12-2dba-4bc5-aca6-34b7a779397b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -30,12 +33,18 @@
     <ClCompile Include="Jogador.c">
       <Filter>Source Files\Jogador</Filter>
     </ClCompile>
+    <ClCompile Include="Treinador.c">
+      <Filter>Source Files\Treinador</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Equipa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Jogador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Treinador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

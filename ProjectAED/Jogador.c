@@ -59,7 +59,7 @@ void mostraTodosJogadores(void)
 	// obter os dados dos ficheiros
 	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
 	{
-		if (jogador.ativo != 0 && jogador.idEquipa == 18)
+		if (jogador.ativo != 0 && jogador.idEquipa == 6)
 		{
 			printf("%06d\t%-20s\n", jogador.id, jogador.nome);
 		}
