@@ -17,3 +17,6 @@ typedef struct {
 
 // Esta funcao guarda o treinador
 void registarTreinador(Treinador treinador);
+
+// esta função retorna um treinador conforme o Id enviado
+Treinador obterTreinador(int id);

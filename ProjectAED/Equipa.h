@@ -23,5 +23,8 @@ void mostraEquipasAtivas(void);
 // gravar uma coleção de equipas
 void gravaTodasEquipas(Equipa* equipas, int n);
 
-// obter uam equipa conforme o nome
+// obter uma equipa conforme o nome
 Equipa obterEquipa(char* nome);
+
+// obter uma equipa conforme o id
+Equipa obterEquipaById(int id);

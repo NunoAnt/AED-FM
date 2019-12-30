@@ -103,3 +103,40 @@ Equipa obterEquipa(char* nome)
 	// retornar a equipa
 	return equipa;
 }
+
+// esta função retorna uma equipa com o mesmo id
+Equipa obterEquipaById(int id)
+{
+	// variaveis
+	FILE* ficheiro;
+	Equipa equipa;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO, "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// obter as equipas
+	while (fread(&equipa, sizeof(Equipa), 1, ficheiro) == 1)
+	{
+		if (equipa.id == id && equipa.ativo != 0)
+		{
+			fclose(ficheiro);
+			return equipa;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	// retornar a equipa
+	return equipa;
+}

@@ -1,6 +1,7 @@
 #define _CRT_STDIO_ISO_WIDE_SPECIFIERS
 #define _CRT_SECURE_NO_WARNINGS
 #include "Jogador.h"
+#include "Equipa.h"
 
 // esta função recebe um e grava-o na base de dados
 void gravaTodosJogadores(Jogador* jogadores, int n)
@@ -33,6 +34,7 @@ void gravaTodosJogadores(Jogador* jogadores, int n)
 	fclose(ficheiro);
 }
 
+// mostrar todos os jogadores
 void mostraTodosJogadores(void)
 {
 	// variaveis
@@ -40,12 +42,12 @@ void mostraTodosJogadores(void)
 	Jogador jogador;
 
 	// tentar abrir ficheiro (r = leitura b = binario)
-	ficheiro = fopen(FICHEIRO, "rb");
+	ficheiro = fopen("Jogadores.dat", "rb");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO);
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", "Jogadores.dat");
 		return;
 	}
 
@@ -59,7 +61,7 @@ void mostraTodosJogadores(void)
 	// obter os dados dos ficheiros
 	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
 	{
-		if (jogador.ativo != 0 && jogador.idEquipa == 6)
+		if (jogador.ativo != 0)
 		{
 			printf("%06d\t%-20s\n", jogador.id, jogador.nome);
 		}
@@ -70,4 +72,40 @@ void mostraTodosJogadores(void)
 
 	// fim da listagem
 	printf("=== fim ======\n");
+}
+
+// Esta função lista os jogadores por id da Equipa
+void mostrarJogadorEquipa(int idEquipa)
+{
+	// variaveis
+	FILE* ficheiro;
+	Jogador jogador;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen("Jogadores.dat", "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", "Jogadores.dat");
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// inicio da listagem
+	printf("\n\n=== Plantel %s ======\n", obterEquipaById(idEquipa).nome);
+
+	// obter os dados dos ficheiros
+	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
+	{
+		if (jogador.ativo != 0 && jogador.idEquipa == idEquipa)
+		{
+			printf("Nome: %-20s\tNumero: %2d\tPosicao: %10s\tStat Gr: %3d\tStat Defesa: %3d\tStat Medio: %3d\tStat Avancado: %3d\tContrato: %02d/%02d/%4d\n", jogador.nome, jogador.numero, jogador.posicao, jogador.statGr, jogador.statD, jogador.statM, jogador.statA, jogador.dia, jogador.mes, jogador.anoContrato);
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
 }

@@ -28,3 +28,6 @@ void gravaTodosJogadores(Jogador* jogadores, int n);
 
 // Esta função lista os jogadores
 void mostraTodosJogadores(void);
+
+// Esta função lista os jogadores por id da Equipa
+void mostrarJogadorEquipa(int idEquipa);

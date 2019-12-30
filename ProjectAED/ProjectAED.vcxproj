@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Equipa.c" />
     <ClCompile Include="Jogador.c" />
+    <ClCompile Include="Jogos.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Treinador.c" />
   </ItemGroup>
