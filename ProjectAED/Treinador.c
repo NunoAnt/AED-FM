@@ -8,12 +8,12 @@ void registarTreinador(Treinador treinador)
 	FILE* ficheiro;
 
 	// tentar abrir ficheiro (w = escrever b = binario)
-	ficheiro = fopen(FICHEIRO, "w+b");
+	ficheiro = fopen(FICHEIRO_TREINADOR, "w+b");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!", FICHEIRO);
+		printf("!!!não foi possivel abrir o ficheiro %s!!!", FICHEIRO_TREINADOR);
 		return;
 	}
 
@@ -35,12 +35,12 @@ Treinador obterTreinador(int id)
 	Treinador treinador;
 
 	// tentar abrir ficheiro (r = leitura b = binario)
-	ficheiro = fopen(FICHEIRO, "rb");
+	ficheiro = fopen(FICHEIRO_TREINADOR, "rb");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO);
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_TREINADOR);
 		return;
 	}
 

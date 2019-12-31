@@ -11,12 +11,12 @@ void gravaTodosJogadores(Jogador* jogadores, int n)
 	int i;
 
 	// tentar abrir ficheiro (w = escrever b = binario)
-	ficheiro = fopen(FICHEIRO, "w+b");
+	ficheiro = fopen(FICHEIRO_JOGADOR, "w+b");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!", FICHEIRO);
+		printf("!!!não foi possivel abrir o ficheiro %s!!!", FICHEIRO_JOGADOR);
 		return;
 	}
 
@@ -42,12 +42,12 @@ void mostraTodosJogadores(void)
 	Jogador jogador;
 
 	// tentar abrir ficheiro (r = leitura b = binario)
-	ficheiro = fopen("Jogadores.dat", "rb");
+	ficheiro = fopen(FICHEIRO_JOGADOR, "rb");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", "Jogadores.dat");
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_JOGADOR);
 		return;
 	}
 
@@ -82,12 +82,12 @@ void mostrarJogadorEquipa(int idEquipa)
 	Jogador jogador;
 
 	// tentar abrir ficheiro (r = leitura b = binario)
-	ficheiro = fopen("Jogadores.dat", "rb");
+	ficheiro = fopen(FICHEIRO_JOGADOR, "rb");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", "Jogadores.dat");
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_JOGADOR);
 		return;
 	}
 

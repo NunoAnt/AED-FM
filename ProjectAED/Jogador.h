@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define FICHEIRO "Jogadores.dat"
+#define FICHEIRO_JOGADOR "Jogadores.dat"
 #define TRUE 1
 #define FALSE 0
 

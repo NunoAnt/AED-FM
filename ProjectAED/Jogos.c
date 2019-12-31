@@ -11,12 +11,12 @@ void gravaTodosJogos(Jogo* jogos, int n)
 	int i;
 
 	// tentar abrir ficheiro (w = escrever b = binario)
-	ficheiro = fopen(FICHEIRO, "w+b");
+	ficheiro = fopen(FICHEIRO_JOGO, "w+b");
 
 	// se não for possivel abrir o ficherio, mostra erro e sai
 	if (ficheiro == NULL)
 	{
-		printf("!!!não foi possivel abrir o ficheiro %s!!!");
+		printf("!!!não foi possivel abrir o ficheiro %s!!!", FICHEIRO_JOGO);
 		return;
 	}
 

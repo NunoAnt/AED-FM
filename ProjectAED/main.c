@@ -11,6 +11,7 @@
 void recolherDadosTreinador();
 void realizarCalendario();
 void mostrarPlantel(int idEquipa);
+void mostrarDadosEquipa(int idEquipa);
 
 int main(void)
 {
@@ -24,7 +25,7 @@ int main(void)
 
 	// este metódo guarda os dados do utilizador
 	recolherDadosTreinador();
-	
+
 	// este metódo realiza o caléndario
 	realizarCalendario();
 
@@ -43,8 +44,10 @@ int main(void)
 		printf("1 - Plantel\n");
 		printf("2 - Classificacao\n");
 		printf("3 - Jogos\n");
-		printf("3 - Transferencias\n");
-		printf("4 - Proximo Jogo\n");
+		printf("4 - Transferencias\n");
+		printf("6 - Clube\n");
+		printf("7 - Treinador\n");
+		printf("8 - Proximo Jogo\n");
 		printf("0 - Sair\n\n");
 
 		// recolher opção e limpar o buffer
@@ -58,6 +61,10 @@ int main(void)
 		case 1: 
 			// apresentar o plantel da equipa
 			mostrarPlantel(obterTreinador(1).idEquipa);
+			break;
+		case 6:
+			// apresentar os dados da equipa
+			mostrarDadosEquipa(obterTreinador(1).idEquipa);
 			break;
 		default:
 			printf("Categoria nao prevista");
@@ -422,11 +429,27 @@ void realizarCalendario()
 	gravaTodosJogos(jogos, 45);
 }	
 
+// esta função mostra o plantel da equipa pretendida
 void mostrarPlantel(int idEquipa) 
 {
+	// esta função obtém o plantel da equipa e apresenta-o
 	mostrarJogadorEquipa(idEquipa);
 
-	printf("\n Para continuar pressione o ENTER");
+	// mensagem de como continuar o pograma
+	printf("\nPara continuar pressione o ENTER");
+
+	// Aguardar que o utilizador carrege no enter
+	while (getchar() != '\n');
+}
+
+// esta função apresenta os dados da equipa
+void mostrarDadosEquipa(int idEquipa)
+{
+	// esta função apresenta os dados da equipa
+	mostrarEquipa(idEquipa);
+
+	// mensagem de como continuar o pograma
+	printf("\nPara continuar pressione o ENTER");
 
 	// Aguardar que o utilizador carrege no enter
 	while (getchar() != '\n');

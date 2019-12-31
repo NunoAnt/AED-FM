@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define FICHEIRO "Equipas.dat"
+#define FICHEIRO_EQUIPA "Equipas.dat"
 #define TRUE 1
 #define FALSE 0
 
@@ -28,3 +28,6 @@ Equipa obterEquipa(char* nome);
 
 // obter uma equipa conforme o id
 Equipa obterEquipaById(int id);
+
+// mostra os dados atuais da equipa
+void mostrarEquipa(int id);
