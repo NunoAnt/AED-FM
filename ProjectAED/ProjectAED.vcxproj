@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Equipa.c" />
+    <ClCompile Include="EstatisticaEquipa.c" />
     <ClCompile Include="Jogador.c" />
     <ClCompile Include="Jogos.c" />
     <ClCompile Include="main.c" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Equipa.h" />
+    <ClInclude Include="EstatisticaEquipa.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Treinador.h" />

@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Jogos">
       <UniqueIdentifier>{ab3cf241-ba2f-4ea1-8d4f-f8fc37365c01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\EstatisticaEquipa">
+      <UniqueIdentifier>{33fef1ec-b417-42c2-88e5-c52ffb05d815}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -42,6 +45,9 @@
     <ClCompile Include="Jogos.c">
       <Filter>Source Files\Jogos</Filter>
     </ClCompile>
+    <ClCompile Include="EstatisticaEquipa.c">
+      <Filter>Source Files\EstatisticaEquipa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Equipa.h">
@@ -54,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Jogo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EstatisticaEquipa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

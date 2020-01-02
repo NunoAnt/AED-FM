@@ -6,12 +6,15 @@
 #include "Jogador.h"
 #include "Treinador.h"
 #include "Jogo.h"
+#include "EstatisticaEquipa.h"
 
 // declarar sub-rotinas
 void recolherDadosTreinador();
 void realizarCalendario();
 void mostrarPlantel(int idEquipa);
 void mostrarDadosEquipa(int idEquipa);
+void inicializarEstatisticas();
+void apresentarClassificacao();
 
 int main(void)
 {
@@ -29,6 +32,9 @@ int main(void)
 	// este metódo realiza o caléndario
 	realizarCalendario();
 
+	// este método inicializa as estatisticas
+	inicializarEstatisticas();
+
 	// Menu
 	do 
 	{
@@ -43,11 +49,10 @@ int main(void)
 		// Apresentacao Menu
 		printf("1 - Plantel\n");
 		printf("2 - Classificacao\n");
-		printf("3 - Jogos\n");
+		printf("3 - Calendario\n");
 		printf("4 - Transferencias\n");
 		printf("6 - Clube\n");
-		printf("7 - Treinador\n");
-		printf("8 - Proximo Jogo\n");
+		printf("7 - Proximo Jogo\n");
 		printf("0 - Sair\n\n");
 
 		// recolher opção e limpar o buffer
@@ -61,6 +66,10 @@ int main(void)
 		case 1: 
 			// apresentar o plantel da equipa
 			mostrarPlantel(obterTreinador(1).idEquipa);
+			break;
+		case 2:
+			// apresentar a classificação
+			apresentarClassificacao();
 			break;
 		case 6:
 			// apresentar os dados da equipa
@@ -429,6 +438,104 @@ void realizarCalendario()
 	gravaTodosJogos(jogos, 45);
 }	
 
+// esta função inicializa as estatisticas
+void inicializarEstatisticas()
+{
+	EstatisticaEquipa estatisticasEquipas[10];
+
+	estatisticasEquipas[0].id = 1;
+	estatisticasEquipas[0].idEquipa = obterEquipa("Benfica").id;
+	estatisticasEquipas[0].golosMarcados = 0;
+	estatisticasEquipas[0].golosSofridos = 0;
+	estatisticasEquipas[0].numeroVitorias = 0;
+	estatisticasEquipas[0].numeroDerrotas = 0;
+	estatisticasEquipas[0].numeroEmpates = 0;
+	estatisticasEquipas[0].numeroPontos = 0;
+
+	estatisticasEquipas[1].id = 2;
+	estatisticasEquipas[1].idEquipa = obterEquipa("Porto").id;
+	estatisticasEquipas[1].golosMarcados = 0;
+	estatisticasEquipas[1].golosSofridos = 0;
+	estatisticasEquipas[1].numeroVitorias = 0;
+	estatisticasEquipas[1].numeroDerrotas = 0;
+	estatisticasEquipas[1].numeroEmpates = 0;
+	estatisticasEquipas[1].numeroPontos = 0;
+
+	estatisticasEquipas[2].id = 3;
+	estatisticasEquipas[2].idEquipa = obterEquipa("Sporting").id;
+	estatisticasEquipas[2].golosMarcados = 0;
+	estatisticasEquipas[2].golosSofridos = 0;
+	estatisticasEquipas[2].numeroVitorias = 0;
+	estatisticasEquipas[2].numeroDerrotas = 0;
+	estatisticasEquipas[2].numeroEmpates = 0;
+	estatisticasEquipas[2].numeroPontos = 0;
+
+	estatisticasEquipas[3].id = 4;
+	estatisticasEquipas[3].idEquipa = obterEquipa("Famalicao").id;
+	estatisticasEquipas[3].golosMarcados = 0;
+	estatisticasEquipas[3].golosSofridos = 0;
+	estatisticasEquipas[3].numeroVitorias = 0;
+	estatisticasEquipas[3].numeroDerrotas = 0;
+	estatisticasEquipas[3].numeroEmpates = 0;
+	estatisticasEquipas[3].numeroPontos = 0;
+
+	estatisticasEquipas[4].id = 5;
+	estatisticasEquipas[4].idEquipa = obterEquipa("Vitoria Sport Clube").id;
+	estatisticasEquipas[4].golosMarcados = 0;
+	estatisticasEquipas[4].golosSofridos = 0;
+	estatisticasEquipas[4].numeroVitorias = 0;
+	estatisticasEquipas[4].numeroDerrotas = 0;
+	estatisticasEquipas[4].numeroEmpates = 0;
+	estatisticasEquipas[4].numeroPontos = 0;
+
+	estatisticasEquipas[5].id = 6;
+	estatisticasEquipas[5].idEquipa = obterEquipa("Rio Ave").id;
+	estatisticasEquipas[5].golosMarcados = 0;
+	estatisticasEquipas[5].golosSofridos = 0;
+	estatisticasEquipas[5].numeroVitorias = 0;
+	estatisticasEquipas[5].numeroDerrotas = 0;
+	estatisticasEquipas[5].numeroEmpates = 0;
+	estatisticasEquipas[5].numeroPontos = 0;
+
+	estatisticasEquipas[6].id = 7;
+	estatisticasEquipas[6].idEquipa = obterEquipa("Vitoria Futebol Clube").id;
+	estatisticasEquipas[6].golosMarcados = 0;
+	estatisticasEquipas[6].golosSofridos = 0;
+	estatisticasEquipas[6].numeroVitorias = 0;
+	estatisticasEquipas[6].numeroDerrotas = 0;
+	estatisticasEquipas[6].numeroEmpates = 0;
+	estatisticasEquipas[6].numeroPontos = 0;
+
+	estatisticasEquipas[7].id = 8;
+	estatisticasEquipas[7].idEquipa = obterEquipa("Moreirense").id;
+	estatisticasEquipas[7].golosMarcados = 0;
+	estatisticasEquipas[7].golosSofridos = 0;
+	estatisticasEquipas[7].numeroVitorias = 0;
+	estatisticasEquipas[7].numeroDerrotas = 0;
+	estatisticasEquipas[7].numeroEmpates = 0;
+	estatisticasEquipas[7].numeroPontos = 0;
+
+	estatisticasEquipas[8].id = 9;
+	estatisticasEquipas[8].idEquipa = obterEquipa("Gil Vicente").id;
+	estatisticasEquipas[8].golosMarcados = 0;
+	estatisticasEquipas[8].golosSofridos = 0;
+	estatisticasEquipas[8].numeroVitorias = 0;
+	estatisticasEquipas[8].numeroDerrotas = 0;
+	estatisticasEquipas[8].numeroEmpates = 0;
+	estatisticasEquipas[8].numeroPontos = 0;
+
+	estatisticasEquipas[9].id = 10;
+	estatisticasEquipas[9].idEquipa = obterEquipa("Belenenses").id;
+	estatisticasEquipas[9].golosMarcados = 0;
+	estatisticasEquipas[9].golosSofridos = 0;
+	estatisticasEquipas[9].numeroVitorias = 0;
+	estatisticasEquipas[9].numeroDerrotas = 0;
+	estatisticasEquipas[9].numeroEmpates = 0;
+	estatisticasEquipas[9].numeroPontos = 0;
+
+	gravaStatEquipasTodas(estatisticasEquipas, 10);
+}
+
 // esta função mostra o plantel da equipa pretendida
 void mostrarPlantel(int idEquipa) 
 {
@@ -447,6 +554,19 @@ void mostrarDadosEquipa(int idEquipa)
 {
 	// esta função apresenta os dados da equipa
 	mostrarEquipa(idEquipa);
+
+	// mensagem de como continuar o pograma
+	printf("\nPara continuar pressione o ENTER");
+
+	// Aguardar que o utilizador carrege no enter
+	while (getchar() != '\n');
+}
+
+// está função apresenta a classificação da equipa
+void apresentarClassificacao()
+{
+	// esta função apresenta a classificação atual
+	mostrarClassificacao();
 
 	// mensagem de como continuar o pograma
 	printf("\nPara continuar pressione o ENTER");
