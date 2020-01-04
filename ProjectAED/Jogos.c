@@ -4,6 +4,12 @@
 #include "Equipa.h"
 #include "Jogador.h"
 
+// esta função gera um numero aliatorio entre o seguinte espaço
+int randGolos(int min, int max)
+{
+	return rand() % (max - min + 1) + min;
+}
+
 // esta função recebe um conjuntos de jogos e grava-os na base de dados
 void gravaTodosJogos(Jogo* jogos, int n)
 {
@@ -108,6 +114,57 @@ void mostrarProximaJornada(int numeroJornada)
 	fclose(ficheiro);
 }
 
+// esta função simula o jogo
+void simularResultadoJogo(Jogo jogo, Jogador* equipa1, Jogador* equipa2)
+{
+	// declarar variaveis
+	int forcaAtaqueEquipa1 = 0, forcaAtaqueEquipa2 = 0, forcaMediosEquipa1 = 0, forcaMediosEquipa2 = 0, forcaDefesasEquipa1 = 0, forcaDefesasEquipa2 = 0;
+	int i;
+
+	// somar força da equipa
+	for (i = 0; i < 11; i++)
+	{
+		// força de ataque
+		forcaAtaqueEquipa1 += equipa1[i].statA;
+		forcaAtaqueEquipa2 += forcaAtaqueEquipa2 + equipa2[i].statA;
+
+		// força de meio campo
+		forcaMediosEquipa1 += equipa1[i].statM;
+		forcaMediosEquipa2 += equipa2[i].statM;
+
+		// força de defesa
+		forcaDefesasEquipa1 += equipa1[i].statD;
+		forcaDefesasEquipa2 += equipa2[i].statD;
+	}
+
+	// definir quantos golos marca uma equipa com ataque vs defesa
+	if (forcaAtaqueEquipa1 > forcaDefesasEquipa2)
+	{
+		jogo.golosEquipa1 += randGolos(0, 3);
+	}
+	else if (forcaAtaqueEquipa2 > forcaDefesasEquipa1)
+	{
+		jogo.golosEquipa2 += randGolos(0, 3);
+	}
+	else
+	{
+		jogo.golosEquipa1 += randGolos(0, 3);
+		jogo.golosEquipa2 += randGolos(0, 3);
+	}
+
+	// verificar quem tem um melhor meio campo
+	if (forcaMediosEquipa1 > forcaMediosEquipa2)
+	{
+		jogo.golosEquipa1 += randGolos(0, 2);
+	}
+	else
+	{
+		jogo.golosEquipa2 += randGolos(0, 2);
+	}
+
+	printf("Equipa1-%d vs Equipa2-%d", jogo.golosEquipa1, jogo.golosEquipa2);
+}
+
 // esta funcao simula o jogo
 void simularJogo(Jogo jogo, int idEquipa)
 {
@@ -157,26 +214,9 @@ void simularJogo(Jogo jogo, int idEquipa)
 		idEquipaAdversaria = jogo.idEquipa1;
 	}
 
+	// simular o plantel da equipa adversaria
 	equipaConvocada2 = simularPlantelAI(idEquipaAdversaria);
 
-	for (i = 0; i < 11; i++)
-	{
-		printf("%s\n", equipaConvocada2[i].nome);
-	}
-}
-
-// esta função simula o jogo
-void simularJogo(Jogo jogo, Jogador* equipa1, Jogador* equipa2)
-{
-	// declarar variaveis
-	int forcaAtaqueEquipa1 = 0, forcaAtaqueEquipa2 = 0, forcaMediosEquipa1 = 0, forcaMediosEquipa2 = 0, forcaDefesasEquipa1 = 0, forcaDefesaEquipa2 = 0;
-	int i;
-
-	// somar o ataque da equipa
-	for (i = 0; i < 11; i++)
-	{
-		forcaAtaqueEquipa1 += equipa1[i].statA;
-		forcaAtaqueEquipa2 += equipa2[i].statA;
-	}
-	
+	// simular o resultado
+	simularResultadoJogo(jogo, equipaConvocada1, equipaConvocada2);
 }

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <time.h>
 
+
 #define FICHEIRO_JOGO "Jogos.dat"
 #define TRUE 1
 #define FALSE 0
@@ -28,5 +29,3 @@ Jogo obterJogo(int idEquipa, int numeroJornada);
 
 // esta função simula o jogo
 void simularJogo(Jogo jogo, int idEquipa);
-
-void teste();

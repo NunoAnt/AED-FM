@@ -186,12 +186,16 @@ Jogador* simularPlantelAI(int idEquipa)
 		}
 	}
 
+	// igual o i a 0 para percorer o array todo
 	i = 0;
+
 	// simular convocados
 	while (i != 11)
 	{
+		// obter um jogador do plantel de forma aletoria
 		jogador = plantelEquipa[i + rand_in_range(0, 5)];
 
+		// verificar se o jogador já está convocado
 		if (jogadorConvocadoExits(jogadoresConvocados, jogador) == FALSE)
 		{
 			jogadoresConvocados[i] = jogador;
@@ -210,16 +214,16 @@ Jogador* simularPlantelAI(int idEquipa)
 int jogadorConvocadoExits(Jogador* jogadores, Jogador jogador)
 {
 	// declarar variaveis
-	int i, exits = FALSE;
+	int i, existe = FALSE;
 
 	// verificar se já existe
-	for (i = 0; i < 11 && exits == FALSE; i++)
+	for (i = 0; i < 11 && existe == FALSE; i++)
 	{
 		if (jogador.id == jogadores[i].id)
 		{
-			exits = TRUE;
+			existe = TRUE;
 		}
 	}
 
-	return exits;
+	return existe;
 }
