@@ -4,7 +4,6 @@
 #include "Equipa.h"
 #include "Jogador.h"
 
-
 // esta função recebe um conjuntos de jogos e grava-os na base de dados
 void gravaTodosJogos(Jogo* jogos, int n)
 {
@@ -113,9 +112,9 @@ void mostrarProximaJornada(int numeroJornada)
 void simularJogo(Jogo jogo, int idEquipa)
 {
 	// declarar variaveis
-	int tatica, i, numeroJogador;
+	int tatica, i, numeroJogador, idEquipaAdversaria;
 	char taticas[4][6] = { "5-3-2", "4-5-1", "4-4-2", "4-3-3" };
-	Jogador equipaConvocada1[11], equipaConvocada2[11];
+	Jogador equipaConvocada1[11], *equipaConvocada2;
 
 	// limpar consola
 	system("cls");
@@ -148,11 +147,36 @@ void simularJogo(Jogo jogo, int idEquipa)
 		equipaConvocada1[i] = obterJogadorEquipa(idEquipa, numeroJogador);
 	}
 
+	// verificar qual a equipa para ser controlada pelo computador
+	if (idEquipa == jogo.idEquipa1)
+	{
+		idEquipaAdversaria = jogo.idEquipa2;
+	}
+	else
+	{
+		idEquipaAdversaria = jogo.idEquipa1;
+	}
 
-	teste();
+	equipaConvocada2 = simularPlantelAI(idEquipaAdversaria);
+
+	for (i = 0; i < 11; i++)
+	{
+		printf("%s\n", equipaConvocada2[i].nome);
+	}
 }
 
-void teste()
+// esta função simula o jogo
+void simularJogo(Jogo jogo, Jogador* equipa1, Jogador* equipa2)
 {
+	// declarar variaveis
+	int forcaAtaqueEquipa1 = 0, forcaAtaqueEquipa2 = 0, forcaMediosEquipa1 = 0, forcaMediosEquipa2 = 0, forcaDefesasEquipa1 = 0, forcaDefesaEquipa2 = 0;
+	int i;
 
+	// somar o ataque da equipa
+	for (i = 0; i < 11; i++)
+	{
+		forcaAtaqueEquipa1 += equipa1[i].statA;
+		forcaAtaqueEquipa2 += equipa2[i].statA;
+	}
+	
 }

@@ -3,6 +3,12 @@
 #include "Jogador.h"
 #include "Equipa.h"
 
+// esta função gera um numero aliatorio entre o seguinte espaço
+int rand_in_range(int min, int max)
+{
+	return rand() % (max - min + 1) + min;
+}
+
 // esta função recebe um e grava-o na base de dados
 void gravaTodosJogadores(Jogador* jogadores, int n)
 {
@@ -145,4 +151,75 @@ Jogador obterJogadorEquipa(int idEquipa, int numeroJogador)
 	fclose(ficheiro);
 
 	return jogador;
+}
+
+// Esta função simula um plantel de uma equipa
+Jogador* simularPlantelAI(int idEquipa)
+{
+	// variaveis
+	FILE* ficheiro;
+	Jogador jogador;
+	static Jogador jogadoresConvocados[11];
+	Jogador plantelEquipa[20];
+	int i = 0, j;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_JOGADOR, "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_JOGADOR);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// obter os dados dos ficheiros
+	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
+	{
+		if (jogador.ativo != 0 && jogador.idEquipa == idEquipa)
+		{
+			plantelEquipa[i] = jogador;
+			i++;
+		}
+	}
+
+	i = 0;
+	// simular convocados
+	while (i != 11)
+	{
+		jogador = plantelEquipa[i + rand_in_range(0, 5)];
+
+		if (jogadorConvocadoExits(jogadoresConvocados, jogador) == FALSE)
+		{
+			jogadoresConvocados[i] = jogador;
+			i++;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	// retornar plantel
+	return jogadoresConvocados;
+}
+
+// verificar se o jogador já está convocado
+int jogadorConvocadoExits(Jogador* jogadores, Jogador jogador)
+{
+	// declarar variaveis
+	int i, exits = FALSE;
+
+	// verificar se já existe
+	for (i = 0; i < 11 && exits == FALSE; i++)
+	{
+		if (jogador.id == jogadores[i].id)
+		{
+			exits = TRUE;
+		}
+	}
+
+	return exits;
 }

@@ -647,4 +647,3 @@ void proximoJogo(int idEquipa)
 	// Aguardar que o utilizador carrege no enter
 	while (getchar() != '\n');
 }
-

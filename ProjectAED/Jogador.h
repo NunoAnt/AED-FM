@@ -34,3 +34,6 @@ void mostrarJogadorEquipa(int idEquipa);
 
 // esta função retorna um jogador da equipa convocada pelo treinador
 Jogador obterJogadorEquipa(int idEquipa, int numeroJogador);
+
+// Esta função simula um plantel de uma equipa
+Jogador* simularPlantelAI(int idEquipa);
