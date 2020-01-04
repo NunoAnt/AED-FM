@@ -31,3 +31,6 @@ void mostraTodosJogadores(void);
 
 // Esta função lista os jogadores por id da Equipa
 void mostrarJogadorEquipa(int idEquipa);
+
+// esta função retorna um jogador da equipa convocada pelo treinador
+Jogador obterJogadorEquipa(int idEquipa, int numeroJogador);

@@ -109,3 +109,40 @@ void mostrarJogadorEquipa(int idEquipa)
 	// fechar o ficheiro
 	fclose(ficheiro);
 }
+
+// esta função retorna um jogador da equipa convocada pelo treinador
+Jogador obterJogadorEquipa(int idEquipa, int numeroJogador)
+{
+	// variaveis
+	FILE* ficheiro;
+	Jogador jogador;
+	int i = 0, j;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_JOGADOR, "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_JOGADOR);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// obter os dados dos ficheiros
+	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
+	{
+		if (jogador.ativo != 0 && jogador.idEquipa == idEquipa && jogador.numero == numeroJogador)
+		{
+			fclose(ficheiro);
+			return jogador;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	return jogador;
+}
