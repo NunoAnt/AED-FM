@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define FICHEIRO_JOGADOR "Jogadores.dat"
@@ -36,4 +37,5 @@ void mostrarJogadorEquipa(int idEquipa);
 Jogador obterJogadorEquipa(int idEquipa, int numeroJogador);
 
 // Esta função simula um plantel de uma equipa
-Jogador simularPlantelAI(int idEquipa);
+Jogador simularConvocadosAI(int idEquipa, Jogador* jogadoresConvocados);
+

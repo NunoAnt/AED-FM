@@ -79,6 +79,7 @@ Jogo obterJogo(int idEquipa, int numeroJornada)
 	return jogo;
 }
 
+// obter os jogos que tem de ser realizados pelo computador
 Jogo* obterJogosAI(int idEquipa, int numeroJornada)
 {
 	// variaveis
@@ -149,6 +150,42 @@ void mostrarJornada(int numeroJornada)
 		if (jogo.ativo != 0 && jogo.jornada == numeroJornada)
 		{
 			printf("%-30s %d vs %d %30s\n", obterEquipaById(jogo.idEquipa1).nome, jogo.golosEquipa1, jogo.golosEquipa2,obterEquipaById(jogo.idEquipa2).nome);
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+}
+
+// esta função mostra o calendario conforme o id da equipa
+void mostraCalendarioByEquipa(int idEquipa)
+{
+	// variaveis
+	FILE* ficheiro;
+	Jogo jogo;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_JOGO, "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_JOGO);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// inicio da listagem
+	printf("\n\n=============== CALENDARIO ===============\n");
+
+	// obter os dados dos ficheiros
+	while (fread(&jogo, sizeof(Jogo), 1, ficheiro) == 1)
+	{
+		if (jogo.ativo != 0 && (jogo.idEquipa1 == idEquipa || jogo.idEquipa2 == idEquipa))
+		{
+			printf("%-30s %d vs %d %30s\n", obterEquipaById(jogo.idEquipa1).nome, jogo.golosEquipa1, jogo.golosEquipa2, obterEquipaById(jogo.idEquipa2).nome);
 		}
 	}
 
@@ -391,7 +428,7 @@ void simularJogo(Jogo jogo, int idEquipa)
 	// simular o plantel da equipa adversaria
 	for (i = 0; i < 11; i++)
 	{
-		equipaConvocada2[i] = simularPlantelAI(idEquipaAdversaria);
+		equipaConvocada2[i] = simularConvocadosAI(idEquipaAdversaria, equipaConvocada2);
 	}
 
 	// simular o resultado
@@ -415,8 +452,8 @@ void simularJogosAI(int idEquipaTreinador, int numeroJornada)
 		// simular o plantel das equipas
 		for (j = 0; j < 11; j++)
 		{
-			equipaConvocada1[j] = simularPlantelAI(jogos[i].idEquipa1);
-			equipaConvocada2[j] = simularPlantelAI(jogos[i].idEquipa2);
+			equipaConvocada1[j] = simularConvocadosAI(jogos[i].idEquipa1, equipaConvocada1);
+			equipaConvocada2[j] = simularConvocadosAI(jogos[i].idEquipa2, equipaConvocada2);
 		}
 
 		// simular o jogo

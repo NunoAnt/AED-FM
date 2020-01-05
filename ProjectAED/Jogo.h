@@ -32,3 +32,6 @@ void simularJogo(Jogo jogo, int idEquipa);
 
 // esta função simula os jogos da equipas controladas pelo computador
 void simularJogosAI(int idEquipaTreinador, int numeroJornada);
+
+// esta função mostra o calendario conforme o id da equipa
+void mostraCalendarioByEquipa(int idEquipa);

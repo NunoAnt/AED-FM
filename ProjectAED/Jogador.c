@@ -155,13 +155,13 @@ Jogador obterJogadorEquipa(int idEquipa, int numeroJogador)
 }
 
 // Esta função simula um plantel de uma equipa
-Jogador simularPlantelAI(int idEquipa, Jogador *plantel)
+Jogador simularConvocadosAI(int idEquipa, Jogador* jogadoresConvocados)
 {
 	// variaveis
 	FILE* ficheiro;
 	Jogador jogador;
 	Jogador plantelEquipa[20];
-	int i = 0, j;
+	int i = 0, j, jogadorEncontrado;
 
 	// tentar abrir ficheiro (r = leitura b = binario)
 	ficheiro = fopen(FICHEIRO_JOGADOR, "rb");
@@ -186,18 +186,18 @@ Jogador simularPlantelAI(int idEquipa, Jogador *plantel)
 		}
 	}
 
-	// igual o i a 0 para percorer o array todo
-	i = 0;
+	// incializar variavel
+	jogadorEncontrado = FALSE;
 
-	// simular convocados
-	while (1)
+	// procurar equanto não encontrar um jogador
+	while (jogadorEncontrado == FALSE)
 	{
 		// obter um jogador do plantel de forma aletoria
-		jogador = plantelEquipa[i + rand_in_range(0, 5)];
+		jogador = plantelEquipa[rand_in_range(0, 20)];
 
-		if (jogadorConvocadoExits(plantel, jogador) == FALSE)
+		if (jogadorConvocadoExits(jogadoresConvocados, jogador) == FALSE)
 		{
-			break;
+			jogadorEncontrado = TRUE;
 		}
 	}
 

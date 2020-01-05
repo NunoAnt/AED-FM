@@ -16,6 +16,7 @@ void mostrarDadosEquipa(int idEquipa);
 void inicializarEstatisticas();
 void apresentarClassificacao();
 void proximoJogo(int idEquipa);
+void apresentarCalendario(int idEquipa);
 
 // variaveis globsid
 int numeroJornada = 1;
@@ -85,6 +86,10 @@ int main(void)
 		case 2:
 			// apresentar a classificação
 			apresentarClassificacao();
+			break;
+		case 3:
+			// apresentar o calendário da equipa
+			apresentarCalendario(treinador.idEquipa);
 			break;
 		case 6:
 			// apresentar os dados da equipa
@@ -665,6 +670,19 @@ void proximoJogo(int idEquipa)
 
 	// passar para a proxima jornada
 	numeroJornada++;
+
+	// mensagem de como continuar o pograma
+	printf("\nPara continuar pressione o ENTER");
+
+	// Aguardar que o utilizador carrege no enter
+	while (getchar() != '\n');
+}
+
+// esta função mostra o calendario da equipa pretendida
+void apresentarCalendario(int idEquipa)
+{
+	// esta função obtem o calendário da equipa e apresenta-o
+	mostraCalendarioByEquipa(idEquipa);
 
 	// mensagem de como continuar o pograma
 	printf("\nPara continuar pressione o ENTER");
