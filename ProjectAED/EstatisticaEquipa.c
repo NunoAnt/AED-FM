@@ -99,3 +99,117 @@ void mostrarClassificacao(void)
 		printf("%2d - \t%-30s\t%2d %2d %2d %2d %2d %2d    %2d\n", i + 1, obterEquipaById(estatisticasEquipas[i].idEquipa).nome, estatisticasEquipas[i].golosMarcados, estatisticasEquipas[i].golosSofridos, estatisticasEquipas[i].golosMarcados - estatisticasEquipas[i].golosSofridos, estatisticasEquipas[i].numeroVitorias, estatisticasEquipas[i].numeroEmpates, estatisticasEquipas[i].numeroDerrotas, estatisticasEquipas[i].numeroPontos);
 	}
 }
+
+// esta função, procura o registo da estatistica da equipa com o idEquipa e devolve o indice onde se encontra (dentro do ficheiro);
+int getIndiceEstatisticaEquipa(int id)
+{
+	// variaveis
+	FILE* ficheiro;
+	EstatisticaEquipa estatisticaEquipa;
+	int indice = -1, i = -1;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_ESTATISTICA_EQUIPA, "rb");
+
+	// se não foi possivel abrir o ficheiro (por exemplo: por não existir), mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_ESTATISTICA_EQUIPA);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);
+
+	// procurar o registo da estatistica, cujo estatistica.idEquipa == id
+	while (fread(&estatisticaEquipa, sizeof(EstatisticaEquipa), 1, ficheiro) == 1)
+	{
+		// incrementa o contador de registos
+		i++;
+
+		// encontrou o pretendido e se esse registo estiver ativo - guardar o indice
+		if (estatisticaEquipa.idEquipa == id && (estatisticaEquipa.ativo != 0))
+		{
+			indice = i;
+			return;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	// devolver indice
+	return indice;
+}
+
+// esta função, altera a estatistica com o indice <indice>
+void editarEstatistica(int indice, EstatisticaEquipa estatisticaEquipaAlterada)
+{
+	// variaveis
+	FILE* ficheiro;
+	int posicaoFicheiro;
+
+	// tentar abrir ficheiro (r = leitura (+) = permiteLeituraEscrita b = binario)
+	ficheiro = fopen(FICHEIRO_ESTATISTICA_EQUIPA, "r+b");
+
+	// se não foi possivel abrir o ficheiro, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_ESTATISTICA_EQUIPA);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);
+
+	// a posicao no ficheiro onde guardar a alteração calcula-se com a formula seguinte
+	posicaoFicheiro = sizeof(EstatisticaEquipa) * indice;
+
+	// colocar o apontador a apontar para o primeiro Byte respeitante do ficheiro
+	// onde está gravado o registo com o indice <indice>
+	fseek(ficheiro, posicaoFicheiro, SEEK_SET);
+
+	// agora que o apontador está a apontar para o primeiro Byte do registo, "descarregar"
+	// ou "escrever" os Bytes que prefazem a nova versao deste jogo <jogoAlterado>
+	fwrite(&estatisticaEquipaAlterada, sizeof(EstatisticaEquipa), 1, ficheiro);
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+}
+
+// esta função retorna a estatistica da equipa
+EstatisticaEquipa obterEstatisticaByEquipaId(int idEquipa) 
+{
+	// variaveis
+	FILE* ficheiro;
+	EstatisticaEquipa estatisticaEquipa;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_ESTATISTICA_EQUIPA, "rb");
+
+	// se não for possivel abrir o ficherio, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_ESTATISTICA_EQUIPA);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
+
+	// obter as equipas
+	while (fread(&estatisticaEquipa, sizeof(EstatisticaEquipa), 1, ficheiro) == 1)
+	{
+		if (estatisticaEquipa.idEquipa == idEquipa && estatisticaEquipa.ativo != 0)
+		{
+			fclose(ficheiro);
+			return estatisticaEquipa;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	// retornar a equipa
+	return estatisticaEquipa;
+}

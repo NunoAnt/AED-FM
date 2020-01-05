@@ -150,16 +150,16 @@ Jogador obterJogadorEquipa(int idEquipa, int numeroJogador)
 	// fechar o ficheiro
 	fclose(ficheiro);
 
+	// retornar jogador
 	return jogador;
 }
 
 // Esta função simula um plantel de uma equipa
-Jogador* simularPlantelAI(int idEquipa)
+Jogador simularPlantelAI(int idEquipa, Jogador *plantel)
 {
 	// variaveis
 	FILE* ficheiro;
 	Jogador jogador;
-	static Jogador jogadoresConvocados[11];
 	Jogador plantelEquipa[20];
 	int i = 0, j;
 
@@ -177,7 +177,7 @@ Jogador* simularPlantelAI(int idEquipa)
 	rewind(ficheiro);  //fseek(ficheiro, 0, SEEK_SET);
 
 	// obter os dados dos ficheiros
-	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1)
+	while (fread(&jogador, sizeof(Jogador), 1, ficheiro) == 1 && i != 11)
 	{
 		if (jogador.ativo != 0 && jogador.idEquipa == idEquipa)
 		{
@@ -190,16 +190,14 @@ Jogador* simularPlantelAI(int idEquipa)
 	i = 0;
 
 	// simular convocados
-	while (i != 11)
+	while (1)
 	{
 		// obter um jogador do plantel de forma aletoria
 		jogador = plantelEquipa[i + rand_in_range(0, 5)];
 
-		// verificar se o jogador já está convocado
-		if (jogadorConvocadoExits(jogadoresConvocados, jogador) == FALSE)
+		if (jogadorConvocadoExits(plantel, jogador) == FALSE)
 		{
-			jogadoresConvocados[i] = jogador;
-			i++;
+			break;
 		}
 	}
 
@@ -207,7 +205,7 @@ Jogador* simularPlantelAI(int idEquipa)
 	fclose(ficheiro);
 
 	// retornar plantel
-	return jogadoresConvocados;
+	return jogador;
 }
 
 // verificar se o jogador já está convocado

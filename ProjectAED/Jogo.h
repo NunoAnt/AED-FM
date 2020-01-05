@@ -22,10 +22,13 @@ typedef struct {
 void gravaTodosJogos(Jogo* jogos, int n);
 
 // esta função apresenta a proxima jornada
-void mostrarProximaJornada(int numeroJornada);
+void mostrarJornada(int numeroJornada);
 
 // esta função retorna um jogo
 Jogo obterJogo(int idEquipa, int numeroJornada);
 
 // esta função simula o jogo
 void simularJogo(Jogo jogo, int idEquipa);
+
+// esta função simula os jogos da equipas controladas pelo computador
+void simularJogosAI(int idEquipaTreinador, int numeroJornada);

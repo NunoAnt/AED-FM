@@ -24,6 +24,7 @@ int main(void)
 {
 	// declarar variaveis
 	int opcao;
+	Treinador treinador;
 
 	// Mensagem inicial
 	printf("==============================\n");
@@ -39,6 +40,8 @@ int main(void)
 	// este método inicializa as estatisticas
 	inicializarEstatisticas();
 
+	treinador = obterTreinador(1);
+
 	// Menu
 	do 
 	{
@@ -47,8 +50,8 @@ int main(void)
 		
 		// Apresentação do Ecra Principal
 		printf("============ AED FM ===============\n\n");
-		printf("Treinador: %s", obterTreinador(1).nome);
-		printf("Clube Atual: %s \n\n", obterEquipaById(obterTreinador(1).idEquipa).nome);
+		printf("Treinador: %s", treinador.nome);
+		printf("Clube Atual: %s \n\n", obterEquipaById(treinador.idEquipa).nome);
 
 		// Apresentacao Menu
 		printf("1 - Plantel\n");
@@ -64,12 +67,20 @@ int main(void)
 		scanf("%d", &opcao);
 		while (getchar() != '\n');
 
+		// verificar se já chegou ao fim da epoca
+		if (numeroJornada == 10)
+		{
+			// apresentar o a classificação e terminar programa
+			mostrarClassificacao();
+			return 0;
+		}
+
 		// decidir a opção
 		switch (opcao)
 		{
 		case 1: 
 			// apresentar o plantel da equipa
-			mostrarPlantel(obterTreinador(1).idEquipa);
+			mostrarPlantel(treinador.idEquipa);
 			break;
 		case 2:
 			// apresentar a classificação
@@ -77,11 +88,11 @@ int main(void)
 			break;
 		case 6:
 			// apresentar os dados da equipa
-			mostrarDadosEquipa(obterTreinador(1).idEquipa);
+			mostrarDadosEquipa(treinador.idEquipa);
 			break;
 		case 7:
 			// inicializar jogo
-			proximoJogo(obterTreinador(1).idEquipa);
+			proximoJogo(treinador.idEquipa);
 			break;
 		default:
 			printf("Categoria nao prevista");
@@ -129,39 +140,39 @@ void realizarCalendario()
 	Jogo jogos[45];
 
 	jogos[0].id = 1;
-	jogos[0].idEquipa1 = 1;
-	jogos[0].idEquipa2 = 8;
+	jogos[0].idEquipa1 = 10;
+	jogos[0].idEquipa2 = 1;
 	jogos[0].jornada = 1;
 	jogos[0].golosEquipa1 = 0;
 	jogos[0].golosEquipa2 = 0;
 	jogos[0].ativo = 1;
 
 	jogos[1].id = 2;
-	jogos[1].idEquipa1 = 2;
-	jogos[1].idEquipa2 = 3;
+	jogos[1].idEquipa1 = 6;
+	jogos[1].idEquipa2 = 2;
 	jogos[1].jornada = 1;
 	jogos[1].golosEquipa1 = 0;
 	jogos[1].golosEquipa2 = 0;
 	jogos[1].ativo = 1;
 
 	jogos[2].id = 3;
-	jogos[2].idEquipa1 = 4;
-	jogos[2].idEquipa2 = 7;
+	jogos[2].idEquipa1 = 3;
+	jogos[2].idEquipa2 = 5;
 	jogos[2].jornada = 1;
 	jogos[2].golosEquipa1 = 0;
 	jogos[2].golosEquipa2 = 0;
 	jogos[2].ativo = 1;
 
 	jogos[3].id = 4;
-	jogos[3].idEquipa1 = 7;
-	jogos[3].idEquipa2 = 6;
+	jogos[3].idEquipa1 = 8;
+	jogos[3].idEquipa2 = 7;
 	jogos[3].jornada = 1;
 	jogos[3].golosEquipa1 = 0;
 	jogos[3].golosEquipa2 = 0;
 	jogos[3].ativo = 1;
 
 	jogos[4].id = 5;
-	jogos[4].idEquipa1 = 10;
+	jogos[4].idEquipa1 = 4;
 	jogos[4].idEquipa2 = 9;
 	jogos[4].jornada = 1;
 	jogos[4].golosEquipa1 = 0;
@@ -169,24 +180,24 @@ void realizarCalendario()
 	jogos[4].ativo = 1;
 
 	jogos[5].id = 6;
-	jogos[5].idEquipa1 = 3;
-	jogos[5].idEquipa2 = 1;
+	jogos[5].idEquipa1 = 2;
+	jogos[5].idEquipa2 = 3;
 	jogos[5].jornada = 2;
 	jogos[5].golosEquipa1 = 0;
 	jogos[5].golosEquipa2 = 0;
 	jogos[5].ativo = 1;
 
 	jogos[6].id = 7;
-	jogos[6].idEquipa1 = 6;
-	jogos[6].idEquipa2 = 10;
+	jogos[6].idEquipa1 = 5;
+	jogos[6].idEquipa2 = 6;
 	jogos[6].jornada = 2;
 	jogos[6].golosEquipa1 = 0;
 	jogos[6].golosEquipa2 = 0;
 	jogos[6].ativo = 1;
 
 	jogos[7].id = 8;
-	jogos[7].idEquipa1 = 7;
-	jogos[7].idEquipa2 = 5;
+	jogos[7].idEquipa1 = 1;
+	jogos[7].idEquipa2 = 7;
 	jogos[7].jornada = 2;
 	jogos[7].golosEquipa1 = 0;
 	jogos[7].golosEquipa2 = 0;
@@ -194,38 +205,38 @@ void realizarCalendario()
 
 	jogos[8].id = 9;
 	jogos[8].idEquipa1 = 8;
-	jogos[8].idEquipa2 = 4;
+	jogos[8].idEquipa2 = 9;
 	jogos[8].jornada = 2;
 	jogos[8].golosEquipa1 = 0;
 	jogos[8].golosEquipa2 = 0;
 	jogos[8].ativo = 1;
 
 	jogos[9].id = 10;
-	jogos[9].idEquipa1 = 9;
-	jogos[9].idEquipa2 = 2;
+	jogos[9].idEquipa1 = 4;
+	jogos[9].idEquipa2 = 10;
 	jogos[9].jornada = 2;
 	jogos[9].golosEquipa1 = 0;
 	jogos[9].golosEquipa2 = 0;
 	jogos[9].ativo = 1;
 
 	jogos[10].id = 11;
-	jogos[10].idEquipa1 = 1;
-	jogos[10].idEquipa2 = 9;
+	jogos[10].idEquipa1 = 4;
+	jogos[10].idEquipa2 = 1;
 	jogos[10].jornada = 3;
 	jogos[10].golosEquipa1 = 0;
 	jogos[10].golosEquipa2 = 0;
 	jogos[10].ativo = 1;
 
 	jogos[11].id = 12;
-	jogos[11].idEquipa1 = 2;
-	jogos[11].idEquipa2 = 6;
+	jogos[11].idEquipa1 = 7;
+	jogos[11].idEquipa2 = 2;
 	jogos[11].jornada = 3;
 	jogos[11].golosEquipa1 = 0;
 	jogos[11].golosEquipa2 = 0;
 	jogos[11].ativo = 1;
 
 	jogos[12].id = 13;
-	jogos[12].idEquipa1 = 4;
+	jogos[12].idEquipa1 = 6;
 	jogos[12].idEquipa2 = 3;
 	jogos[12].jornada = 3;
 	jogos[12].golosEquipa1 = 0;
@@ -233,8 +244,8 @@ void realizarCalendario()
 	jogos[12].ativo = 1;
 
 	jogos[13].id = 14;
-	jogos[13].idEquipa1 = 8;
-	jogos[13].idEquipa2 = 7;
+	jogos[13].idEquipa1 = 9;
+	jogos[13].idEquipa2 = 5;
 	jogos[13].jornada = 3;
 	jogos[13].golosEquipa1 = 0;
 	jogos[13].golosEquipa2 = 0;
@@ -242,94 +253,94 @@ void realizarCalendario()
 
 	jogos[14].id = 15;
 	jogos[14].idEquipa1 = 10;
-	jogos[14].idEquipa2 = 5;
+	jogos[14].idEquipa2 = 8;
 	jogos[14].jornada = 3;
 	jogos[14].golosEquipa1 = 0;
 	jogos[14].golosEquipa2 = 0;
 	jogos[14].ativo = 1;
 
 	jogos[15].id = 16;
-	jogos[15].idEquipa1 = 3;
-	jogos[15].idEquipa2 = 8;
+	jogos[15].idEquipa1 = 2;
+	jogos[15].idEquipa2 = 1;
 	jogos[15].jornada = 4;
 	jogos[15].golosEquipa1 = 0;
 	jogos[15].golosEquipa2 = 0;
 	jogos[15].ativo = 1;
 
 	jogos[16].id = 17;
-	jogos[16].idEquipa1 = 5;
-	jogos[16].idEquipa2 = 2;
+	jogos[16].idEquipa1 = 3;
+	jogos[16].idEquipa2 = 4;
 	jogos[16].jornada = 4;
 	jogos[16].golosEquipa1 = 0;
 	jogos[16].golosEquipa2 = 0;
 	jogos[16].ativo = 1;
 
 	jogos[17].id = 18;
-	jogos[17].idEquipa1 = 6;
-	jogos[17].idEquipa2 = 1;
+	jogos[17].idEquipa1 = 8;
+	jogos[17].idEquipa2 = 6;
 	jogos[17].jornada = 4;
 	jogos[17].golosEquipa1 = 0;
 	jogos[17].golosEquipa2 = 0;
 	jogos[17].ativo = 1;
 
 	jogos[18].id = 19;
-	jogos[18].idEquipa1 = 7;
-	jogos[18].idEquipa2 = 10;
+	jogos[18].idEquipa1 = 9;
+	jogos[18].idEquipa2 = 7;
 	jogos[18].jornada = 4;
 	jogos[18].golosEquipa1 = 0;
 	jogos[18].golosEquipa2 = 0;
 	jogos[18].ativo = 1;
 
 	jogos[19].id = 20;
-	jogos[19].idEquipa1 = 9;
-	jogos[19].idEquipa2 = 4;
+	jogos[19].idEquipa1 = 5;
+	jogos[19].idEquipa2 = 10;
 	jogos[19].jornada = 4;
 	jogos[19].golosEquipa1 = 0;
 	jogos[19].golosEquipa2 = 0;
 	jogos[19].ativo = 1;
 
 	jogos[20].id = 21;
-	jogos[20].idEquipa1 = 1;
-	jogos[20].idEquipa2 = 5;
+	jogos[20].idEquipa1 = 5;
+	jogos[20].idEquipa2 = 1;
 	jogos[20].jornada = 5;
 	jogos[20].golosEquipa1 = 0;
 	jogos[20].golosEquipa2 = 0;
 	jogos[20].ativo = 1;
 
 	jogos[21].id = 22;
-	jogos[21].idEquipa1 = 2;
-	jogos[21].idEquipa2 = 10;
+	jogos[21].idEquipa1 = 8;
+	jogos[21].idEquipa2 = 2;
 	jogos[21].jornada = 5;
 	jogos[21].golosEquipa1 = 0;
 	jogos[21].golosEquipa2 = 0;
 	jogos[21].ativo = 1;
 
 	jogos[22].id = 23;
-	jogos[22].idEquipa1 = 3;
-	jogos[22].idEquipa2 = 7;
+	jogos[22].idEquipa1 = 9;
+	jogos[22].idEquipa2 = 3;
 	jogos[22].jornada = 5;
 	jogos[22].golosEquipa1 = 0;
 	jogos[22].golosEquipa2 = 0;
 	jogos[22].ativo = 1;
 
 	jogos[23].id = 24;
-	jogos[23].idEquipa1 = 4;
-	jogos[23].idEquipa2 = 6;
+	jogos[23].idEquipa1 = 7;
+	jogos[23].idEquipa2 = 4;
 	jogos[23].jornada = 5;
 	jogos[23].golosEquipa1 = 0;
 	jogos[23].golosEquipa2 = 0;
 	jogos[23].ativo = 1;
 
 	jogos[24].id = 25;
-	jogos[24].idEquipa1 = 8;
-	jogos[24].idEquipa2 = 9;
+	jogos[24].idEquipa1 = 10;
+	jogos[24].idEquipa2 = 6;
 	jogos[24].jornada = 5;
 	jogos[24].golosEquipa1 = 0;
 	jogos[24].golosEquipa2 = 0;
 	jogos[24].ativo = 1;
 
 	jogos[25].id = 26;
-	jogos[25].idEquipa1 = 5;
+	jogos[25].idEquipa1 = 6;
 	jogos[25].idEquipa2 = 4;
 	jogos[25].jornada = 6;
 	jogos[25].golosEquipa1 = 0;
@@ -337,128 +348,128 @@ void realizarCalendario()
 	jogos[25].ativo = 1;
 
 	jogos[26].id = 27;
-	jogos[26].idEquipa1 = 6;
-	jogos[26].idEquipa2 = 8;
+	jogos[26].idEquipa1 = 3;
+	jogos[26].idEquipa2 = 7;
 	jogos[26].jornada = 6;
 	jogos[26].golosEquipa1 = 0;
 	jogos[26].golosEquipa2 = 0;
 	jogos[26].ativo = 1;
 
 	jogos[27].id = 28;
-	jogos[27].idEquipa1 = 7;
-	jogos[27].idEquipa2 = 2;
+	jogos[27].idEquipa1 = 5;
+	jogos[27].idEquipa2 = 8;
 	jogos[27].jornada = 6;
 	jogos[27].golosEquipa1 = 0;
 	jogos[27].golosEquipa2 = 0;
 	jogos[27].ativo = 1;
 
 	jogos[28].id = 29;
-	jogos[28].idEquipa1 = 9;
-	jogos[28].idEquipa2 = 3;
+	jogos[28].idEquipa1 = 1;
+	jogos[28].idEquipa2 = 9;
 	jogos[28].jornada = 6;
 	jogos[28].golosEquipa1 = 0;
 	jogos[28].golosEquipa2 = 0;
 	jogos[28].ativo = 1;
 
 	jogos[29].id = 30;
-	jogos[29].idEquipa1 = 10;
-	jogos[29].idEquipa2 = 1;
+	jogos[29].idEquipa1 = 2;
+	jogos[29].idEquipa2 = 10;
 	jogos[29].jornada = 6;
 	jogos[29].golosEquipa1 = 0;
 	jogos[29].golosEquipa2 = 0;
 	jogos[29].ativo = 1;
 
 	jogos[30].id = 31;
-	jogos[30].idEquipa1 = 1;
-	jogos[30].idEquipa2 = 2;
+	jogos[30].idEquipa1 = 6;
+	jogos[30].idEquipa2 = 1;
 	jogos[30].jornada = 7;
 	jogos[30].golosEquipa1 = 0;
 	jogos[30].golosEquipa2 = 0;
 	jogos[30].ativo = 1;
 
 	jogos[31].id = 32;
-	jogos[31].idEquipa1 = 3;
-	jogos[31].idEquipa2 = 6;
+	jogos[31].idEquipa1 = 4;
+	jogos[31].idEquipa2 = 5;
 	jogos[31].jornada = 7;
 	jogos[31].golosEquipa1 = 0;
 	jogos[31].golosEquipa2 = 0;
 	jogos[31].ativo = 1;
 
 	jogos[32].id = 33;
-	jogos[32].idEquipa1 = 4;
-	jogos[32].idEquipa2 = 10;
+	jogos[32].idEquipa1 = 10;
+	jogos[32].idEquipa2 = 7;
 	jogos[32].jornada = 7;
 	jogos[32].golosEquipa1 = 0;
 	jogos[32].golosEquipa2 = 0;
 	jogos[32].ativo = 1;
 
 	jogos[33].id = 34;
-	jogos[33].idEquipa1 = 8;
-	jogos[33].idEquipa2 = 5;
+	jogos[33].idEquipa1 = 3;
+	jogos[33].idEquipa2 = 8;
 	jogos[33].jornada = 7;
 	jogos[33].golosEquipa1 = 0;
 	jogos[33].golosEquipa2 = 0;
 	jogos[33].ativo = 1;
 
 	jogos[34].id = 35;
-	jogos[34].idEquipa1 = 9;
-	jogos[34].idEquipa2 = 7;
+	jogos[34].idEquipa1 = 2;
+	jogos[34].idEquipa2 = 9;
 	jogos[34].jornada = 7;
 	jogos[34].golosEquipa1 = 0;
 	jogos[34].golosEquipa2 = 0;
 	jogos[34].ativo = 1;
 
 	jogos[35].id = 36;
-	jogos[35].idEquipa1 = 1;
-	jogos[35].idEquipa2 = 7;
+	jogos[35].idEquipa1 = 2;
+	jogos[35].idEquipa2 = 4;
 	jogos[35].jornada = 8;
 	jogos[35].golosEquipa1 = 0;
 	jogos[35].golosEquipa2 = 0;
 	jogos[35].ativo = 1;
 
 	jogos[36].id = 37;
-	jogos[36].idEquipa1 = 2;
-	jogos[36].idEquipa2 = 4;
+	jogos[36].idEquipa1 = 7;
+	jogos[36].idEquipa2 = 5;
 	jogos[36].jornada = 8;
 	jogos[36].golosEquipa1 = 0;
 	jogos[36].golosEquipa2 = 0;
 	jogos[36].ativo = 1;
 
 	jogos[37].id = 38;
-	jogos[37].idEquipa1 = 5;
-	jogos[37].idEquipa2 = 3;
+	jogos[37].idEquipa1 = 9;
+	jogos[37].idEquipa2 = 6;
 	jogos[37].jornada = 8;
 	jogos[37].golosEquipa1 = 0;
 	jogos[37].golosEquipa2 = 0;
 	jogos[37].ativo = 1;
 
 	jogos[38].id = 39;
-	jogos[38].idEquipa1 = 6;
-	jogos[38].idEquipa2 = 9;
+	jogos[38].idEquipa1 = 1;
+	jogos[38].idEquipa2 = 8;
 	jogos[38].jornada = 8;
 	jogos[38].golosEquipa1 = 0;
 	jogos[38].golosEquipa2 = 0;
 	jogos[38].ativo = 1;
 
 	jogos[39].id = 40;
-	jogos[39].idEquipa1 = 10;
-	jogos[39].idEquipa2 = 8;
+	jogos[39].idEquipa1 = 3;
+	jogos[39].idEquipa2 = 10;
 	jogos[39].jornada = 8;
 	jogos[39].golosEquipa1 = 0;
 	jogos[39].golosEquipa2 = 0;
 	jogos[39].ativo = 1;
 
 	jogos[40].id = 41;
-	jogos[40].idEquipa1 = 3;
-	jogos[40].idEquipa2 = 10;
+	jogos[40].idEquipa1 = 5;
+	jogos[40].idEquipa2 = 2;
 	jogos[40].jornada = 9;
 	jogos[40].golosEquipa1 = 0;
 	jogos[40].golosEquipa2 = 0;
 	jogos[40].ativo = 1;
 
 	jogos[41].id = 42;
-	jogos[41].idEquipa1 = 4;
-	jogos[41].idEquipa2 = 1;
+	jogos[41].idEquipa1 = 1;
+	jogos[41].idEquipa2 = 3;
 	jogos[41].jornada = 9;
 	jogos[41].golosEquipa1 = 0;
 	jogos[41].golosEquipa2 = 0;
@@ -473,16 +484,16 @@ void realizarCalendario()
 	jogos[42].ativo = 1;
 
 	jogos[43].id = 44;
-	jogos[43].idEquipa1 = 8;
-	jogos[43].idEquipa2 = 2;
+	jogos[43].idEquipa1 = 4;
+	jogos[43].idEquipa2 = 8;
 	jogos[43].jornada = 9;
 	jogos[43].golosEquipa1 = 0;
 	jogos[43].golosEquipa2 = 0;
 	jogos[43].ativo = 1;
 
 	jogos[44].id = 45;
-	jogos[44].idEquipa1 = 9;
-	jogos[44].idEquipa2 = 5;
+	jogos[44].idEquipa1 = 10;
+	jogos[44].idEquipa2 = 9;
 	jogos[44].jornada = 9;
 	jogos[44].golosEquipa1 = 0;
 	jogos[44].golosEquipa2 = 0;
@@ -539,7 +550,7 @@ void inicializarEstatisticas()
 	estatisticasEquipas[4].numeroVitorias = 0;
 	estatisticasEquipas[4].numeroDerrotas = 0;
 	estatisticasEquipas[4].numeroEmpates = 0;
-	estatisticasEquipas[4].numeroPontos = 6;
+	estatisticasEquipas[4].numeroPontos = 0;
 
 	estatisticasEquipas[5].id = 6;
 	estatisticasEquipas[5].idEquipa = obterEquipa("Rio Ave").id;
@@ -548,7 +559,7 @@ void inicializarEstatisticas()
 	estatisticasEquipas[5].numeroVitorias = 0;
 	estatisticasEquipas[5].numeroDerrotas = 0;
 	estatisticasEquipas[5].numeroEmpates = 0;
-	estatisticasEquipas[5].numeroPontos = 3;
+	estatisticasEquipas[5].numeroPontos = 0;
 
 	estatisticasEquipas[6].id = 7;
 	estatisticasEquipas[6].idEquipa = obterEquipa("Vitoria Futebol Clube").id;
@@ -631,7 +642,11 @@ void apresentarClassificacao()
 // proximo jogo do calendario
 void proximoJogo(int idEquipa)
 {
-	mostrarProximaJornada(numeroJornada);
+	// declarar variaveis
+	Jogo jogo;
+
+	// apresentar os jogos da jornada
+	mostrarJornada(numeroJornada);
 
 	// mensagem de como continuar o pograma
 	printf("\nPara continuar pressione o ENTER");
@@ -639,7 +654,17 @@ void proximoJogo(int idEquipa)
 	// Aguardar que o utilizador carrege no enter
 	while (getchar() != '\n');
 
-	simularJogo(obterJogo(idEquipa, numeroJornada), idEquipa);
+	// obter o jogo da equipa
+	jogo = obterJogo(idEquipa, numeroJornada);
+
+	// simular o jogo do utilizador
+	simularJogo(jogo, idEquipa);
+
+	// simular o jogo do computador
+	simularJogosAI(idEquipa, numeroJornada);
+
+	// passar para a proxima jornada
+	numeroJornada++;
 
 	// mensagem de como continuar o pograma
 	printf("\nPara continuar pressione o ENTER");
