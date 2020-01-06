@@ -31,3 +31,9 @@ Equipa obterEquipaById(int id);
 
 // mostra os dados atuais da equipa
 void mostrarEquipa(int id);
+
+// esta função retorna o indice onde se encontra a equipa no ficheiro
+int getIndiceEquipa(int id);
+
+// esta função altera os dados da equipa com o indice
+void editarEquipa(int indice, Equipa equipaAlterada);

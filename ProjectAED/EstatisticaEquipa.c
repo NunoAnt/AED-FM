@@ -71,17 +71,13 @@ void mostrarClassificacao(void)
 	// fechar o ficheiro
 	fclose(ficheiro);
 
-	// precorrer o array desde a primeira posição até à penultima
+	// orderar o array por pontos
 	for (i = 0; i < (numeroElementos - 1); i++)
 	{
-		// para cada elemento do iterador principal,
-		// percorrer o array desde a posição seguinte até ao fim do array
 		for (j = i + 1; j < numeroElementos; j++)
 		{
-			// verificar se a posição no iterador principal é maior que a do seguinte iterador
 			if (estatisticasEquipas[i].numeroPontos < estatisticasEquipas[j].numeroPontos)
 			{
-				// se o valor do iterador principal for maior, troca os respetivos
 				auxiliar = estatisticasEquipas[j];
 				estatisticasEquipas[j] = estatisticasEquipas[i];
 				estatisticasEquipas[i] = auxiliar;

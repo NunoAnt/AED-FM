@@ -16,7 +16,8 @@ void mostrarDadosEquipa(int idEquipa);
 void inicializarEstatisticas();
 void apresentarClassificacao();
 void proximoJogo(int idEquipa);
-void apresentarCalendario(int idEquipa);
+void apresentarCalendario(int idEquipa); 
+void realizarTransferencias(int idEquipa);
 
 // variaveis globsid
 int numeroJornada = 1;
@@ -90,6 +91,10 @@ int main(void)
 		case 3:
 			// apresentar o calendário da equipa
 			apresentarCalendario(treinador.idEquipa);
+			break;
+		case 4:
+			// realizar transferencias
+			realizarTransferencias(treinador.idEquipa);
 			break;
 		case 6:
 			// apresentar os dados da equipa
@@ -683,6 +688,22 @@ void apresentarCalendario(int idEquipa)
 {
 	// esta função obtem o calendário da equipa e apresenta-o
 	mostraCalendarioByEquipa(idEquipa);
+
+	// mensagem de como continuar o pograma
+	printf("\nPara continuar pressione o ENTER");
+
+	// Aguardar que o utilizador carrege no enter
+	while (getchar() != '\n');
+}
+
+// esta função realiza as transferencias de jogadores
+void realizarTransferencias(int idEquipa)
+{
+	// limpar consola
+	system("cls");
+
+	// realizar a transferencia de jogador
+	realizarTransferencia(idEquipa);
 
 	// mensagem de como continuar o pograma
 	printf("\nPara continuar pressione o ENTER");

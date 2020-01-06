@@ -35,7 +35,6 @@ void mostraEquipasAtivas(void)
 	fclose(ficheiro);
 }
 
-
 // esta função recebe um conjuntos de equipas e grava-o na base de dados
 void gravaTodasEquipas(Equipa* equipas, int n)
 {
@@ -178,6 +177,82 @@ void mostrarEquipa(int id)
 			return;
 		}
 	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+}
+
+// esta função retorna o indice onde se encontra a equipa no ficheiro
+int getIndiceEquipa(int id)
+{
+	// variaveis
+	FILE* ficheiro;
+	Equipa equipa;
+	int indice = -1, i = -1;
+
+	// tentar abrir ficheiro (r = leitura b = binario)
+	ficheiro = fopen(FICHEIRO_EQUIPA, "rb");
+
+	// se não foi possivel abrir o ficheiro (por exemplo: por não existir), mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_EQUIPA);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);
+
+	// procurar o registo da equipa, cujo equipa.id == id
+	while (fread(&equipa, sizeof(Equipa), 1, ficheiro) == 1)
+	{
+		// incrementa o contador de registos
+		i++;
+
+		// encontrou a equipa pretendida e se esse registo estiver ativo - guardar o indice
+		if (equipa.id == id && (equipa.ativo != 0))
+		{
+			indice = i;
+			return;
+		}
+	}
+
+	// fechar o ficheiro
+	fclose(ficheiro);
+
+	// devolver indice
+	return indice;
+}
+
+// esta função altera os dados da equipa com o indice
+void editarEquipa(int indice, Equipa equipaAlterada)
+{
+	// variaveis
+	FILE* ficheiro;
+	int posicaoFicheiro;
+
+	// tentar abrir ficheiro (r = leitura (+) = permiteLeituraEscrita b = binario)
+	ficheiro = fopen(FICHEIRO_EQUIPA, "r+b");
+
+	// se não foi possivel abrir o ficheiro, mostra erro e sai
+	if (ficheiro == NULL)
+	{
+		printf("!!!não foi possivel abrir o ficheiro %s!!!\n", FICHEIRO_EQUIPA);
+		return;
+	}
+
+	// posicionar no inicio do ficheiro
+	rewind(ficheiro);
+
+	// a posicao no ficheiro onde guardar a alteração calcula-se com a formula seguinte
+	posicaoFicheiro = sizeof(Equipa) * indice;
+
+	// colocar o apontador a apontar para o primeiro Byte respeitante do ficheiro
+	// onde está gravado o registo com o indice
+	fseek(ficheiro, posicaoFicheiro, SEEK_SET);
+
+	// escreve sobre o novo jogador sobre o antigo
+	fwrite(&equipaAlterada, sizeof(Equipa), 1, ficheiro);
 
 	// fechar o ficheiro
 	fclose(ficheiro);
